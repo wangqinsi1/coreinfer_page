@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="CoreInfer: Accelerating Large Language Model Inference with Semantics-Inspired Adaptive Sparse Activation">
+  <meta name="keywords" content="Efficient LLM, Fast LLM Inference, Sparse Inference">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DocGenome</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+  <!-- Todo@ change icon -->
+  <link rel="icon" href="./static/images/logo.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- <script defer src="./static/js/fontawesome.all.min.js"></script> -->
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <script src="https://kit.fontawesome.com/dcd6d05807.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.0/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+</head>
+<body>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h2 class="title is-2 publication-title">CoreInfer: Accelerating Large Language Model Inference with Semantics-Inspired Adaptive Sparse Activation</h2>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              Qinsi Wang</a><sup>1</sup>,</span>
+            <span class="author-block">
+              Saeed Vahidian</a><sup>1</sup>,</span>
+            <span class="author-block">
+              Hancheng Ye</a><sup>1</sup>,</span>
+            <span class="author-block">
+              Jiangyang Gu</a><sup>2</sup>,</span>
+            <span class="author-block">
+              Jianyi Zhang</a><sup>1</sup>,</span>
+            <span class="author-block">
+              Yiran Chen</a><sup>1</sup></span>
+             
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup> Duke University</span>
+            <span class="author-block"><sup>2</sup> Ohio State University</span>
+          </div>
+
+          
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/wangqinsi1/CoreInfer"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+               
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- overall preview -->
+<section class="hero teaser">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+    <div class="column is-30 has-text-centered">
+    <div class="images-container">
+      <a href="./static/images/overview.png" data-lightbox="auto label pipeline" data-title="example 2">
+      <img src="./static/images/overview.png"
+           class="interpolation-image"
+           alt="The overview framework of CoreInfer."/>
+    </a></div>
+    <p>Figure 1: The overview framework of CoreInfer. </p>
+    </div>
+  </div>
+  </div>
+</section>
+
+
+<!-- abstract -->
+<section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-2">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Large language models (LLMs) with billions of parameters have sparked a new wave of exciting AI applications. However, their high computational costs and memory demands during inference pose significant challenges. Adaptive sparse activation inference, which activates only a small number of neurons for each token, offers a novel way to accelerate model inference without degrading performance, showing great potential for resource-constrained hardware devices. Nevertheless, existing methods predict activated neurons based on individual tokens with additional MLP, which involve frequent changes in activation maps and resource calls, limiting the acceleration benefits of sparse activation.
+              In this paper, we introduce CoreInfer, an MLP-free adaptive sparse activation inference method based on sentence-level prediction. Specifically, we propose the concept of sentence-wise core neurons,  which refers to the subset of neurons most critical for a given sentence, and empirically demonstrate its effectiveness. To determine the core neurons, we explore the correlation between core neurons and the sentence's semantics. Remarkably, we discovered that core neurons exhibit both stability and similarity in relation to the sentence's semantics—an insight overlooked by previous studies. Building on this finding, we further design two semantic-based methods for predicting core neurons to fit different input scenarios. In CoreInfer, the core neurons are determined during the pre-filling stage and fixed during the encoding stage, enabling zero-cost sparse inference. We evaluated the model generalization and task generalization of CoreInfer across various models and tasks. Notably, on an NVIDIA TITAN XP GPU, CoreInfer achieved a 10.33x and 2.72x speedup compared to the Huggingface implementation and PowerInfer, respectively.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End abstract -->
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!--  Introduction. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+
+        <br/>
+        <!--/ Interpolating. -->
+
+        <h2 class="title is-3"> Demo of the CoreInfer</h2>
+        <div class="content has-text-justified">
+          <p>
+            We introduce CoreInfer, an MLP-free adaptive sparse activation inference method based on sentence-level prediction. CoreInfer on a single RNVIDIA TITAN Xp (12G) running opt (ReLU)-7B with amazing speedup! At the same time, CoreInfer performs well in both question-answering and summarization tasks.
+          </p>
+
+          <div class="columns is-vcentered interpolation-panel">
+            <div class="column is-30 has-text-centered">
+              <video 
+                class="interpolation-video" 
+                controls="controls"
+                autoplay="autoplay"
+                width="1200" 
+                height="1000" 
+                poster="./static/images/video-thumbnail.png"
+                alt="Overview video of CoreInfer.">
+                <source src="./static/images/compare_final.mp4" type="video/mp4">
+                <source src="./static/images/compare_final.mp4" type="video/webm">
+              </video>
+              <video 
+                class="interpolation-video" 
+                controls 
+                width="1200" 
+                height="1000" 
+                poster="./static/images/video-thumbnail.png"
+                alt="Overview video of CoreInfer.">
+                <source src="./static/images/compare_sum.mp4" type="video/mp4">
+                <source src="./static/images/compare_sum.mp4" type="video/webm">
+              </video>
+            <p> Speedup of CoreInfer on question-answering and summary tasks</p>
+            </div>
+          </div>
+        </div>
+
+        
+        
+        <h3 class="title is-3"></h3>
+        <br/><br/>
+        <h2 class="title is-3"> Effectively predict Core Neurons</h2>
+        <div class="content has-text-justified">
+            <p>
+              In our work, we defined token-wise and sentence-wise core neurons. Furthermore, we experimentally proved that LLM only needs one set of Core Neurons to be activated to process an input sentence.
+              In order to accurately predict Core Neurons, we explored the relationship between the Core Neurons and semantics of a sentence and observed two insights:
+              
+              <br> 1. Insight-1: The Stability of Core Neurons Is Related to Semantic Stability.
+              <br> 2. Insight-2: The Similarity of Core Neuron Is Related to Semantic Similarity.
+
+              The experimental results of the two insights are shown below.
+            </p>
+          <div class="columns is-vcentered interpolation-panel">
+            <div class="column is-30 has-text-centered">
+            <div class="images-container">
+              <a href="./static/images/stable.jpg" data-lightbox="auto label pipeline" data-title="example 2">
+              <img src="./static/images/stable.jpg"
+                   class="interpolation-image"
+                   alt="chematic of the designed DocParser pipeline for automated document annotation"/>
+            </a></div>
+            <p>Figure 2: Stability proof: isualization of core neurons when the core neurons are unstable token length of the continuous input sentence is 10, 50, 100, 200, and 300. </p>
+            
+          </div>
+        </div>
+        <div class="columns is-vcentered interpolation-panel">
+          <div class="column is-30 has-text-centered">
+          <div class="images-container">
+            <a href="./static/images/similarity.jpg" data-lightbox="auto label pipeline" data-title="example 2">
+            <img src="./static/images/similarity.jpg"
+                 class="interpolation-image"
+                 alt="chematic of the designed DocParser pipeline for automated document annotation"/>
+          </a></div>
+          <p>Figure 3: Similarity Proof: relationship between the core neurons of sentences and their topics. </p>
+          </div>
+          
+        </div>
+        <p>
+          Based on these two insights, for an input sentence, we propose two methods for core neuron prediction: Stability-guided Prediction:
+          <br> 1. Stability-guided Prediction: when the input sentence has stable semantics, we can approximate the core neurons in decoding stage by directly using the core neurons identified during the pre-filling stage.
+          <br> 2. Similarity-guided Prediction: when the core neurons of an input sentence are unstable, we cluster the training dataset based on this similarity and identify the core neurons by selecting the top neurons that appear most frequently within that semantic group.
+
+        </p>
+
+
+        <h3 class="title is-3"></h3>
+        <br/><br/>
+        <h2 class="title is-3"> Task Performan of CoreInfer</h2>
+        <p>
+          We randomly select samples from the C4 dataset and the TruthfulQA dataset to test the llm output of stability-guided and similarity-guided prediction. The output results are as follows. To our surprise, similarity-guided prediction sometimes has better output results than the original model.
+        </p>
+        <div class="columns is-vcentered interpolation-panel">
+          <div class="column is-30 has-text-centered">
+          <div class="images-container">
+            <a href="./static/images/task_example.jpg" data-lightbox="auto label pipeline" data-title="example 2">
+            <img src="./static/images/task_example.jpg"
+                class="interpolation-image"
+                alt="chematic of the designed DocParser pipeline for automated document annotation"/>
+          </a></div>
+          <p>Figure 4: (Upper) Performance of stability-guided prediction on the generation task. (Lower) Performance of similarity-guided prediction on the question-answering task. </p>
+          </div>
+        </div>
+        <div class="content has-text-justified">
+            <p>
+              We test the performance of different tasks on different datasets and the results are as follows. We find that CoreInfer is not only applicable to models using Relu, but also to the most advanced models using SiLu. This shows that CoreInfer is not limited by the model activation function.
+            </p>
+            <div class="columns is-vcentered interpolation-panel">
+                <div class="column is-30 has-text-centered">
+                <div class="images-container">
+                <a href="./static/images/task_table.jpg" data-lightbox="table_1" data-title="Comparison with document-related benchmarks">
+                <img src="./static/images/task_table.jpg"
+                        class="interpolation-image"
+                        alt="Comparison with document-related benchmarks"/>
+                </a></div>
+                <p>Table 1: Performance comparisons with original models across various tasks using the lm-evaluation-harness. </p>
+                </div>
+            </div>
+            <br/>
+            <h2 class="title is-3"> Hardware Speedup of CoreInfer</h2>
+            <p>
+              We evaluated CoreInfer vs. Transformers Implecation and PowerInfer on a single NVIDIA A100 with a series of FP16 models, and the results are shown below. CoreInfer achieves up to 6x speedup on Llama 2 70B and up to 7x speedup on OPT 66B.
+            </p>
+            <div class="columns is-vcentered interpolation-panel">
+                <div class="column is-30 has-text-centered">
+                <div class="images-container">
+                <a href="./static/images/hardware_speedup.jpg" data-lightbox="table2" data-title="The definition of logical relationships between component units">
+                <img src="./static/images/hardware_speedup.jpg"
+                        class="interpolation-image"
+                        alt="The definition of logical relationships between component units"/>
+                
+                </a></div>
+                <p>Figure 5: Speedup of various models on A100 80GB. The X axis indicates the output length. The Y axis represents the speedup compared with Transformer. </p>
+                </div>
+            </div>
+            
+          
+            <p>
+              We also evaluated CoreInfer and other advanced activation sparse inference on a single NVIDIA Titan Xp(12G) , and the results are illustrated in the same way as above. CoreInfer achieves up to 10.33x speedup on OPT model.
+            </p>
+            <div class="columns is-vcentered interpolation-panel">
+                <div class="column is-30 has-text-centered">
+                <div class="images-container">
+                <a href="./static/images/hardware_table.jpg" data-lightbox="page_distribution" data-title="page_distribution">
+                <img src="./static/images/hardware_table.jpg"
+                        class="interpolation-image"
+                        alt="page_distribution"/>
+                </a></div>
+                <p>Table 2: Comparison of resources required by different methods to run OPT-6.7b on NVIDIA TITAN
+                  XP. ‘NA’ means that the metric is not applicable.</p>
+                </div>
+            </div>
+            <p>
+            Distribution of secondary disciplines in our DocGenome. The count on the x-axis represents the number of documents, and documents from the same primary discipline are marked with the same color.
+            </p>
+        </div>
+
+
+<!-- <h3 class="title is-3"></h3>
+<br/><br/>
+<h2 class="title is-3">BibTeX</h2>
+<div class="content has-text-justified">
+    <div class="columns is-vcentered interpolation-panel">
+        <div class="column is-30">
+<pre><code>@article{xia2024docgenome,
+  title={DocGenome: An Open Large-scale Scientific Document Benchmark for Training Next-generation Large Models},
+  author={},
+  journal={arXiv preprint arXiv:},
+  year={2024}
+}</code></pre></div>
+</div></div> -->
+
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative
+                                                ATTRIBUTION-NONCOMMERCIAL-SHAREALIKE 4.0 INTERNATIONAL License</a>.</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+</body>
+</html>
